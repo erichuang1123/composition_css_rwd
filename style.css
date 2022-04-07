@@ -1,0 +1,1074 @@
+/* 共用區 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&display=swap');
+:root{
+    --red : #FF4141;
+    --block : #2C343B;
+}
+::selection{
+    background-color: var(--red);
+    color: #fff;
+}
+.container{
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Noto Serif TC', serif;
+}
+.sr_only{
+    width: 1px;
+    height: 1px;
+    position: absolute;
+    overflow: hidden;
+}
+img{
+    width: 100%;
+    vertical-align: middle;
+}
+a{
+    text-decoration: none;
+}
+span.block{
+    display: block;
+}
+a.btn{
+    padding: 15px 40px;
+    color: #fff;
+    background-color: var(--red);
+    border-radius: 5px;
+    transition: background-color .3s;
+}
+a.btn:hover{
+    background-color: var(--block);
+}
+.icon_wrap{
+    display: flex;
+}
+.icon_wrap .fa{
+    margin: 0 5px;
+    padding: 10px;
+    width: 15px;
+    height: 15px;
+    line-height: 16px;
+    font-size: 15px;
+    text-align: center;
+    color: var(--red);
+    border: 1px solid #aaa;
+    border-radius: 50%;
+    transition: border .3s,box-shadow .3s;
+    cursor: pointer;
+}
+.icon_wrap .fa:hover{
+    border: 1px solid transparent;
+    box-shadow: 0 0 5px 5px #aaa5;
+}
+/* header區 */
+.main_header{
+    padding: 10px 20px;
+    position: relative;
+    border-bottom: 1px solid #aaa5;
+}
+.header_wrap{
+    display: flex;
+    align-items: center;
+}
+.header_wrap .menu_btn{
+    width: 50px;
+    cursor: pointer;
+}
+.header_wrap .menu_btn .fa{
+    font-size: 30px;
+    color: #aaa;
+}
+.header_wrap .h1{
+    width: 130px;
+    display: block;
+}
+.header_wrap p{
+    display: none;
+}
+.header_wrap .icon_wrap{
+    padding: 10px;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    display: none;
+    opacity: 0;
+    box-shadow: 0 0 3px 3px #aaa3;
+    transition: display .3s,opacity .3s;
+}
+.header_wrap .icon_wrap.active{
+    display: block;
+    opacity: 1;
+}
+.main_header ul{
+    padding: 20px 0;
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 54px;
+    left: -150%;
+    border: 1px solid #aaa5;
+    transition: left .3s;
+}
+.main_header ul.active{
+    left: 0;
+}
+.main_header ul li a{
+    margin-bottom: 5px;
+    padding: 15px;
+    display: block;
+    color: #aaa;
+    transition: background-color .3s,color .3s;
+}
+.main_header ul li:hover a{
+    background-color: var(--red);
+    color: #fff;
+}
+.main_header .icon_btn{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+.main_header .icon_btn .point{
+    margin: auto;
+    width: 7px;
+    height: 7px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #aaa;
+    border-radius: 50%;
+}
+.main_header .icon_btn .point::before,
+.main_header .icon_btn .point::after{
+    content: '';
+    margin: auto;
+    width: 7px;
+    height: 7px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #aaa;
+    border-radius: 50%;
+}
+.main_header .icon_btn .point::before{
+    top: -20px;
+}
+.main_header .icon_btn .point::after{
+    bottom: -20px;
+}
+
+/* section_banner區 */
+.section_banner{
+    padding: 0 20px;
+    position: relative;
+}
+.section_banner::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('./pic/background-1.jpg');
+    background-size: 250% 100%;
+    background-repeat: no-repeat;
+    background-position: center left;
+    z-index: 1;
+    opacity: .5;
+}
+.section_banner .container{
+    position: relative;
+    z-index: 2;
+}
+.banner_item h2{
+    margin-bottom: 45px;
+    padding-top: 40px;
+    line-height: 1.25;
+    color: var(--red);
+    font-size: 55px;
+    font-weight: 900;
+}
+.banner_item p{
+    margin-bottom: 45px;
+    color: #444;
+    line-height: 1.4;
+    font-size: 18px;
+}
+.section_banner .btn{
+    margin-bottom: 95px;
+    display: inline-block;
+}
+
+/* section_service區 */
+.section_servics{
+    padding: 50px 20px;
+}
+.service_item{
+    margin-bottom: 30px;
+    text-align: center;
+}
+.service_item .icon{
+    margin: 0 auto 40px;
+    padding: 20px;
+    width: 50px;
+    height: 50px;
+    line-height: 75px;
+    position: relative;
+    text-align: center;
+    border-radius: 10px;
+}
+.service_item .icon::before{
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    transform: rotate(45deg);
+    z-index: -1;
+    transition: transform .4s,background-color .4s;
+}
+.service_item:hover .icon::before{
+    transform: rotate(0);
+    background-color: var(--red);
+}
+.service_item:hover .icon .fa{
+    color: #fff;
+}
+.service_item .icon .fa{
+    font-size: 45px;
+    color: var(--red);
+    transition: color .4s;
+}
+.service_item h3{
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 800;
+}
+.service_item p{
+    line-height: 1.5;
+    color: #444;
+}
+
+/* section_workout區 */
+.section_workout{
+    padding: 30px 20px;
+    background-image: url('./pic/background-2.png');
+    background-repeat: no-repeat;
+    background-position: center left 40%;
+    background-size: 370%;
+}
+.workout_title{
+    margin-bottom: 40px;
+    padding: 20px 20px;
+    position: relative;
+    border: 2px solid var(--red);
+}
+.workout_title::before{
+    content: 'ONLY 5 DAYS';
+    padding: 0 10px;
+    position: absolute;
+    top: -10px;
+    left: 40px;
+    color: var(--red);
+    background-color: #fff;
+}
+.workout_title h2{
+    margin-bottom: 10px;
+    font-size: 25px;
+    line-height: 1.6;
+}
+.workout_title h2 .fw{
+    font-weight: 900;
+}
+.workout_title p{
+    font-size: 18px;
+    line-height: 1.5;
+}
+.work_item input{
+    margin-bottom: 20px;
+    display: block;
+    padding: 15px 140px 15px 15px;
+    border: 1px solid #aaa;
+    outline: none;
+}
+.work_item input:focus::placeholder{
+    color: transparent;
+}
+.work_item input::placeholder{
+    color: #aaa;
+    transition: color .3s;
+}
+.work_item .btn{
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+/* section_gallery區 */
+.section_gallery{
+    padding: 60px 20px;
+    background-color: #F6F6F6;
+}
+.gallery_title{
+    margin-bottom: 40px;
+    text-align: center;
+}
+.gallery_title h2{
+    margin-bottom: 50px;
+    font-size: 25px;
+}
+.gallery_title h2 span{
+    font-weight: 900;
+}
+.gallery_title p{
+    font-size: 17px;
+    color: #666;
+    line-height: 1.5;
+}
+.gallery_wrap{
+    display: flex;
+    flex-wrap: wrap;
+}
+.gallery_wrap .pic{
+    width: 50%; 
+    padding-bottom: 50%;
+    height: 0;
+    overflow: hidden;
+}
+.gallery_wrap .pic2 img{
+    transform: scale(1.2);
+}
+
+/* section_fitness區 */
+.section_fitness{
+    padding: 0 20px;
+    position: relative;
+}
+.section_fitness::before{
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('./pic/background-3.jpg');
+    background-repeat: no-repeat;
+    background-position: center left 50%;
+    background-size: 350%;
+    opacity: .5;
+}
+.section_fitness .container{
+    position: relative;
+    z-index: 2;
+}
+.fitness_item h2{
+    padding-top: 150px;
+    margin-bottom: 30px;
+    line-height: 1.3;
+    font-size: 55px;
+    color: var(--red);
+    font-weight: 900;
+}
+.fitness_item p{
+    margin-bottom: 35px;
+    line-height: 1.4;
+    font-size: 17px;
+    color: #666;
+}
+.fitness_item a{
+    padding: 20px 50px;
+    margin-bottom: 150px;
+    display: inline-block;
+}
+
+/* section_coaches區 */
+.section_coaches{
+    padding: 50px 0 90px;
+    /* background-color: #F0F0F0; */
+    background: linear-gradient(180deg,#f0f0f0 60%,#fff 40%);
+    position: relative;
+    overflow-x: hidden;
+}
+.section_coaches h2{
+    margin-bottom: 50px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 900;
+}
+.coaches_wrap{
+    display: flex;
+    justify-content: space-between;
+}
+.coaches_item{
+    margin: 0 10%;
+    width: 80%;
+    box-shadow: 5px 5px 10px 10px #aaa5;
+    flex-shrink: 0;
+    /* transform: translate3d(-120px,0,0); */
+}
+.coaches_item .txt{
+    padding: 35px 0 28px;
+    text-align: center;
+    background-color: #fff;
+}
+.coaches_item h3{
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 900;
+}
+.coaches_item p{
+    margin-bottom: 25px;
+    color: #666;
+}
+.coaches_item .icon_wrap{
+    justify-content: center;
+}
+.section_coaches .rwd_control{
+    display: none;
+}
+.section_coaches .page_wrap{
+    display: flex;
+    position: absolute;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+}
+.section_coaches .page{
+    margin: 0 5px;
+    width: 11px;
+    height: 11px;
+    border: 2px solid var(--red);
+    border-radius: 50%;
+    transition: background-color .3s;
+}
+.section_coaches .page.active{
+    background-color: var(--red);
+}
+
+/* section_timer區 */
+.section_timer{
+    padding: 65px 0 0;
+}
+.timer_item{
+    margin-bottom: 75px;
+    text-align: center;
+    color: #4C4C4C;
+}
+.timer_item p{
+    margin-bottom: 18px;
+    font-size: 57px;
+    font-weight: 800;
+}
+
+/* section_clients區 */
+.section_clients{
+    padding: 70px 0 90px;
+    overflow-x: hidden;
+    position: relative;
+}
+.section_clients::before{
+    content: '';
+    width: 100%;
+    height: 60%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 40%;
+    z-index: 1;
+    background: radial-gradient(circle at 5px,#E9E9E9 3.6px, #F6F6F6 0px);
+    background-repeat: repeat;
+    background-size: 30px 30px;
+    background-position: center center;
+}
+.section_clients .container{
+    position: relative;
+    z-index: 2;
+}
+.section_clients .wrap1 h2{
+    margin-bottom: 40px;
+    font-size: 24px;
+    text-align: center;
+}
+.section_clients .wrap1 h2 span{
+    font-weight: 900;
+}
+.evaluate_wrap{
+    display: flex;
+}
+.clients_evaluate{
+    margin: 0 15% 50px;
+    width: 70%;
+    position: relative;
+    flex-shrink: 0;
+}
+.clients_evaluate::before,
+.clients_evaluate::after{
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: var(--red);
+    font-size: 25px;
+}
+.clients_evaluate::before{
+    content: '99';
+    top: -20px;
+    left: -45px;
+}
+.clients_evaluate::after{
+    content: '66';
+    right: -45px;
+    bottom: -20px;
+}
+.clients_evaluate p{
+    margin: 0 0 20px 0;
+    width: 100%;
+    line-height: 1.7;
+    font-size: 20px;
+}
+.clients_evaluate span{
+    margin-left: 50px;
+    padding-left: 45px;
+    position: relative;
+    font-size: 20px;
+}
+.clients_evaluate span::before{
+    content: '';
+    width: 35px;
+    height: 2px;
+    position: absolute;
+    top: 55%;
+    left: 0;
+    background-color: #aaa5;
+}
+.section_clients .wrap1 .btn{
+    margin-left: 20px;
+    margin-bottom: 30px;
+    padding: 20px 10px;
+    display: inline-block;
+}
+.section_clients .wrap2{
+    display: flex;
+}
+.wrap2 .clients_item{
+    margin: 0 5%;
+    padding: 5px;
+    width: 39%;
+    flex-shrink: 0;
+    box-shadow: 2px 2px 15px 15px #aaa5;
+    background-color: #fff;
+}
+.wrap2 .clients_item p{
+    padding: 15px 0;
+    text-align: center;
+    background-color: #fff;
+}
+.section_clients .page_wrap{
+    display: flex;
+    position: absolute;
+    left: 50%;
+    bottom: -50px;
+    transform: translateX(-44%);
+}
+.section_clients .page{
+    margin: 0 5px;
+    width: 11px;
+    height: 11px;
+    border: 2px solid var(--red);
+    border-radius: 50%;
+    transition: background-color .3s;
+}
+.section_clients .page.active{
+    background-color: var(--red);
+}
+
+/* section_blog區 */
+.section_blog{
+    padding: 50px 20px;
+}
+.section_blog h2{
+    margin-bottom: 50px;
+    text-align: center;
+    font-size: 23px;
+    font-weight: 900;
+}
+.blog_item{
+    margin-bottom: 60px;
+    padding: 30px;
+    position: relative;
+    border: 1px solid #aaa5;
+    transition: box-shadow .3s;
+}
+.blog_item:last-of-type{
+    margin-bottom: 0;
+}
+.blog_item:hover{
+    box-shadow: 2px 2px 15px 5px #aaa5;
+}
+.blog_item::before{
+    content: '';
+    margin: 0 auto;
+    position: absolute;
+    width: 80%;
+    height: 4px;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(90deg,#FE8251 10%,var(--red) 95%);
+}
+.blog_item .pic{
+    margin-bottom: 50px;
+    width: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.blog_item .h3{
+    margin-bottom: 30px;
+    display: block;
+    font-size: 20px;
+    color: #000;
+    font-weight: 600;
+    transition: color .3s;
+}
+.blog_item .h3:hover{
+    color: var(--red);
+}
+.blog_item p{
+    margin-bottom: 30px;
+    line-height: 1.6;
+    color: #666;
+}
+.blog_item .btn{
+    margin-bottom: 30px;
+    padding: 10px;
+    display: inline-block;
+}
+.blog_item .data{
+    font-weight: 600;
+}
+
+/* main_footer區 */
+.main_footer{
+    padding: 40px 0;
+}
+.footer_wrap{
+    margin-bottom: 30px;
+    border-bottom: 1px solid #aaa5;
+}
+.footer_item{
+    margin-bottom: 30px;
+    text-align: center;
+}
+.footer_item .h2{
+    margin: 0 auto 20px;
+    width: 170px;
+    display: block;
+}
+.footer_item h3{
+    margin-bottom: 30px;
+    display: inline-block;
+    font-size: 20px;
+    position: relative;
+}
+.footer_item h3::before{
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 5px;
+    bottom: -10px;
+    left: -10px;
+    background: linear-gradient(90deg,#FE8251 20%,var(--red) 80%);
+}
+.footer_item p{
+    margin-bottom: 12px;
+    color: #666;
+}
+.footer_item p a{
+    color: #000;
+    transition: color .3s;
+}
+.footer_item p a:hover{
+    color: var(--red);
+}
+.footer_item .map{
+    padding-bottom: 3px;
+    color: var(--red);
+    border-bottom: 1px solid #aaa;
+    transition: color .3s;
+}
+.footer_item .map:hover{
+    color: #000;
+}
+.copyright{
+    text-align: center;
+}
+.copyright .icon_wrap{
+    margin-bottom: 25px;
+    display: block;
+}
+.copyright p{
+    font-size: 15px;
+    color: #888;
+}
+
+/* rwd576px區 */
+@media screen and (min-width:576px){
+    /* section_banner區*/
+    .section_banner::before{
+        background-size: 250% auto;
+        background-repeat: no-repeat;
+        background-position: center left;
+    }
+
+    /* section_workout區 */
+    .section_workout{
+        padding: 80px 20px;
+        background-position: center left 45%;
+        background-size: 240% 100%;
+    }    
+    .workout_title{
+        width: 80%;
+    }
+    .gallery_wrap .pic{
+        width: 33.3%;
+        padding-bottom: 33.3%;
+    }
+
+        
+    /* section_fitness區 */
+    .section_fitness::before{
+        background-position: center left 45%;
+        background-size: 250%;
+    }
+
+    /* section_coaches區 */
+    .section_coaches{
+        padding: 90px 0 120px;
+    }
+    .coaches_wrap{
+        display: flex;
+        justify-content: space-between;
+    }
+    .coaches_item{
+        margin: 0 5%;
+        width: 40%;
+        box-shadow: 5px 5px 10px 10px #aaa5;
+        flex-shrink: 0;
+        transform: translate3d(-135px,0,0);
+    }
+
+    /* section_timer區 */
+    .section_timer .container{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .timer_item{
+        width: 50%;
+        margin-bottom: 100px;
+        text-align: center;
+        color: #4C4C4C;
+    }   
+        
+    /* section_blog區 */
+    .blog_item{
+        margin: 0 auto 60px;
+        width: 60%;
+    }
+    
+    /* main_footer區 */  
+    .footer_wrap{
+        display: flex;
+        flex-wrap: wrap;
+    }  
+    .footer_item{
+        margin: 0 auto 50px;
+        width: 45%;
+    }
+    .footer_item h3{
+        margin-bottom: 44px;
+    }
+}
+
+/* 768px區 */
+@media screen and (min-width:768px){
+    /* section_banner區*/
+    .section_banner::before{
+        background-size: 150% 100%;
+    }
+    .banner_item{
+        padding-top: 20px;
+        margin-left: auto;
+        width: 60%;
+        text-align: right;
+    }
+    
+    /* section_service區 */
+    .section_service{
+        padding: 90px 40px 50px;
+    }
+    .service_wrap{
+        margin-bottom: 50px;
+        display: flex;
+    }
+    .service_item{
+        margin: 0 auto;
+        width: 45%;
+    }
+
+    /* section_workout區 */
+    .section_workout{
+        padding: 80px 20px;
+        background-image: url('./pic/background-2.png');
+        background-repeat: no-repeat;
+        background-position: center right;
+        background-size: 220% auto;
+    }
+    .workout_title{
+        width: 55%;
+    }
+    
+    /* section_coaches區 */
+    .coaches_item{
+        transform: translate3d(-60%,0,0);
+    }
+
+    /* section_clients區 */
+    .section_clients .wrap1 .btn{
+        margin-left: 10vw;
+    }
+    .clients_evaluate{
+        margin: 0 10% 50px;
+        width: 80%;
+    }
+    .clients_evaluate p{
+        margin-bottom: 35px;
+        font-size: 18px;
+        color: #666;
+        line-height: 2;
+    }
+    .clients_evaluate span{
+        margin-left: 0;
+    }
+    
+    /* main_footer區 */  
+    .main_footer{
+        padding: 60px 60px;
+    }
+    .footer_item{
+        width: 33.3%;
+        text-align: left;
+    }
+    .footer_item .h2{
+        margin: 0 0 20px;
+    }
+    .copyright{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .copyright .icon_wrap{
+        margin: 0;
+        order: 2;
+    }
+    .copyright p{
+        order: 1;
+    }
+}
+
+/* 993px區 */
+@media screen and (min-width:993px){
+    /* section_banner區*/
+    .section_banner::before{
+        background-size: 150% auto;
+        opacity: 1;
+    }
+    .banner_item{
+        padding-top: 70px;
+    }    
+    .banner_item p{
+        margin-bottom: 85px;
+        color: #444;
+        line-height: 1.4;
+        font-size: 18px;
+    }
+    
+    /* header區 */
+    .main_header{
+        padding: 0px 20px;
+    }
+    .main_header .container{
+        display: flex;
+        justify-content: space-between;
+    }
+    .header_wrap .h1{
+        width: 150px;
+    }
+    .header_wrap .menu_btn{
+        display: none;
+    }
+    .main_header .icon_btn{
+        display: none;
+    }
+    .main_header ul{
+        width: auto;
+        height: auto;
+        display: flex;
+        position: initial;
+        border: 0px solid #aaa5;
+    }
+    .main_header ul li{
+        position: relative;
+    }
+    .main_header ul li::before{
+        content: '';
+        width: 100%;
+        height: 1px;
+        position: absolute;
+        bottom: 0;
+        background-color: var(--red);
+        transform: scale(0);
+        transition: transform .3s;
+    }
+    .main_header ul li:hover::before{
+        transform: scale(1);
+    }
+    .main_header ul li a{
+        color: #000;
+    }
+    .main_header ul li:hover a{
+        background-color: transparent;
+        color: #000;
+    }
+    .header_wrap .icon_wrap{
+        padding: 0;
+        position: initial;
+        display: block;
+        opacity: 1;
+        box-shadow: 0 0 0 0 #fff;
+    }
+    /* section_banner區*/
+    .section_banner::before{
+        background-size: 150% 100%;
+    }
+    .banner_item{
+        padding-top: 20px;
+        margin-left: auto;
+        width: 35%;
+        text-align: right;
+    }
+    .banner_item h2{
+        padding-top: 60px;
+        margin-bottom: 35px;
+        line-height: 1.5;
+    }
+
+    /* section_service區 */
+    .section_service .container{
+        padding: 40px 0;
+        display: flex;
+        justify-content: space-between;
+    }
+    .service_wrap{
+        justify-content: space-around;
+    }
+    .service_item{
+        margin: 0;
+        width: 45%;
+    }
+
+    /* section_workout區 */    
+    .section_workout{
+        padding: 70px 20px;
+        background-image: url('./pic/background-2.png');
+        background-repeat: no-repeat;
+        background-position: center right;
+        background-size: 180%;
+    }
+    .workout_title{
+        padding: 40px 50px;
+        width: 60%;
+    }
+    .work_item{
+        margin-left: 50px;
+    }
+
+    /* section_fitness區 */
+    .section_fitness{
+        padding: 30px 20px;
+    }
+    .section_fitness::before{
+        opacity: 1;
+        background-position: center left 45%;
+        background-size: 180%;
+    }
+    .fitness_item{
+        width: 55%;
+    }
+
+    /* section_coaches區 */
+    .coaches_wrap{
+        margin-bottom: 30px;
+        align-items: flex-start;
+    }
+    .coaches_item .icon_wrap{
+        opacity: 0;
+        height: 0;
+        pointer-events: none;
+        transition: opacity .3s,height .3s;
+    }
+    .coaches_item .icon_wrap.active{
+        opacity: 1;
+        height: auto;
+        pointer-events:all
+    }
+
+    /* section_timer區 */
+    .section_timer{
+        margin-bottom: 40px;
+        border-top: 1px solid #f6f6f6;
+        border-bottom: 1px solid #f6f6f6;
+    }
+    .timer_item{
+        width: 25%;
+    }
+
+    /* section_clients區 */  
+    .wrap2 .clients_item{
+        margin: 0 auto;
+        padding: 5px;
+        width: 23%;
+        flex-shrink: 0;
+        box-shadow: 2px 2px 15px 15px #aaa5;
+        background-color: #fff;
+    }  
+
+    /* section_blog區 */
+    .blog_wrap{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .blog_item{
+        margin: 0 auto 50px;
+        width: 50%;
+        box-sizing: border-box;
+    }
+}
+
+/* 1200px區 */
+@media screen and (min-width:1200px){}
