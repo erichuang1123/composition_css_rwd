@@ -3,6 +3,7 @@
 :root{
     --red : #FF4141;
     --block : #2C343B;
+    overflow-x: hidden;
 }
 ::selection{
     background-color: var(--red);
@@ -62,8 +63,12 @@ a.btn:hover{
 /* header區 */
 .main_header{
     padding: 10px 20px;
-    position: relative;
+    position: sticky;
+    top: 0;
+    left: 0;
     border-bottom: 1px solid #aaa5;
+    background-color: #fff;
+    z-index: 5;
 }
 .header_wrap{
     display: flex;
@@ -89,14 +94,26 @@ a.btn:hover{
     position: absolute;
     top: 100%;
     right: 0;
-    display: none;
     opacity: 0;
     box-shadow: 0 0 3px 3px #aaa3;
     transition: display .3s,opacity .3s;
+    pointer-events: none;
 }
 .header_wrap .icon_wrap.active{
-    display: block;
     opacity: 1;
+    pointer-events: all;
+}
+.close_btn{
+    position: fixed;
+    top: 54px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #aaa5;
+    display: none;
+}
+.close_btn.active{
+    display: block;
 }
 .main_header ul{
     padding: 20px 0;
@@ -106,7 +123,9 @@ a.btn:hover{
     top: 54px;
     left: -150%;
     border: 1px solid #aaa5;
+    background-color: #fff;
     transition: left .3s;
+    z-index: 2;
 }
 .main_header ul.active{
     left: 0;
@@ -207,8 +226,8 @@ a.btn:hover{
 }
 
 /* section_service區 */
-.section_servics{
-    padding: 50px 20px;
+.section_service{
+    padding: 100px 20px;
 }
 .service_item{
     margin-bottom: 30px;
@@ -396,7 +415,7 @@ a.btn:hover{
 
 /* section_coaches區 */
 .section_coaches{
-    padding: 50px 0 90px;
+    padding: 80px 0;
     /* background-color: #F0F0F0; */
     background: linear-gradient(180deg,#f0f0f0 60%,#fff 40%);
     position: relative;
@@ -409,15 +428,22 @@ a.btn:hover{
     font-weight: 900;
 }
 .coaches_wrap{
+    overflow-x: hidden;
+}
+.coaches_scroll{
+    margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
+    transform: translateX(-200%);
 }
+/* 利用coaches_item設定寬跟margin
+再用coaches_scroll設定js移動 */
 .coaches_item{
     margin: 0 10%;
     width: 80%;
     box-shadow: 5px 5px 10px 10px #aaa5;
     flex-shrink: 0;
-    /* transform: translate3d(-120px,0,0); */
+    transition: transform .3s;
 }
 .coaches_item .txt{
     padding: 35px 0 28px;
@@ -425,7 +451,7 @@ a.btn:hover{
     background-color: #fff;
 }
 .coaches_item h3{
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     font-size: 20px;
     font-weight: 900;
 }
@@ -453,6 +479,7 @@ a.btn:hover{
     border: 2px solid var(--red);
     border-radius: 50%;
     transition: background-color .3s;
+    cursor: pointer;
 }
 .section_coaches .page.active{
     background-color: var(--red);
@@ -650,7 +677,7 @@ a.btn:hover{
     color: var(--red);
 }
 .blog_item p{
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     line-height: 1.6;
     color: #666;
 }
@@ -729,6 +756,11 @@ a.btn:hover{
 
 /* rwd576px區 */
 @media screen and (min-width:576px){
+    /* main_header區 */
+    .header_wrap .icon_wrap{
+        pointer-events: all;
+    }
+
     /* section_banner區*/
     .section_banner::before{
         background-size: 250% auto;
@@ -770,7 +802,6 @@ a.btn:hover{
         width: 40%;
         box-shadow: 5px 5px 10px 10px #aaa5;
         flex-shrink: 0;
-        transform: translate3d(-135px,0,0);
     }
 
     /* section_timer區 */
@@ -845,7 +876,7 @@ a.btn:hover{
     
     /* section_coaches區 */
     .coaches_item{
-        transform: translate3d(-60%,0,0);
+        /* transform: translate3d(-60%,0,0); */
     }
 
     /* section_clients區 */
@@ -895,7 +926,7 @@ a.btn:hover{
 @media screen and (min-width:993px){
     /* section_banner區*/
     .section_banner::before{
-        background-size: 150% auto;
+        background-size: cover;
         opacity: 1;
     }
     .banner_item{
@@ -1022,6 +1053,9 @@ a.btn:hover{
     }
 
     /* section_coaches區 */
+    .section_coaches{
+        position: relative;
+    }
     .coaches_wrap{
         margin-bottom: 30px;
         align-items: flex-start;
@@ -1032,10 +1066,17 @@ a.btn:hover{
         pointer-events: none;
         transition: opacity .3s,height .3s;
     }
-    .coaches_item .icon_wrap.active{
+    .coaches_item.active .icon_wrap{
         opacity: 1;
         height: auto;
         pointer-events:all
+    }
+    .coaches_item{
+        margin: 0 10%;
+        width: 40%;
+        box-shadow: 5px 5px 10px 10px #aaa5;
+        flex-shrink: 0;
+        transition: transform .3s;
     }
 
     /* section_timer區 */
@@ -1071,4 +1112,353 @@ a.btn:hover{
 }
 
 /* 1200px區 */
-@media screen and (min-width:1200px){}
+@media screen and (min-width:1200px){
+    /* main_header區 */
+    .main_header .menu_btn{
+        margin-right: 25px;
+    }
+    .header_wrap p{
+        margin-right: 20px;
+        display: block;
+        font-size: 12px;
+        line-height: 1.4;
+        color: #666;
+    }
+    .container{
+        margin: 0 auto;
+        max-width: 1200px;
+    }
+    /* section_banner區 */
+    .section_banner{
+        padding: 100px 0;
+    }
+    .section_banner::before{
+        background-size: cover;
+        background-position: center center;
+    }
+    .banner_item p {
+        line-height: 1.6;
+    }
+    .section_banner .btn{
+        padding: 20px 40px;
+    }
+    
+    /* section_workout區 */
+    .section_workout{
+        padding: 80px 20px;
+        background-size: cover;
+    }
+    .workout_title{
+        width: 30%;
+    }
+    .work_item input{
+        margin-bottom: 30px;
+    }
+
+    /* section_gallery區 */
+    .section_gallery{
+        padding: 100px 0;
+        position: relative;
+    }
+    .section_gallery::before{
+        content: '';
+        width: 40%;
+        height: 60%;
+        position: absolute;
+        top: 10%;
+        left: 20%;
+        z-index: 1;
+        background: radial-gradient(circle at 5px,#E9E9E9 3.6px, #F6F6F6 0px);
+        background-repeat: repeat;
+        background-size: 30px 30px;
+        background-position: center center;
+    }
+    .section_gallery::after{
+        content: '';
+        display: block;
+        clear: both;
+    }
+    .section_gallery .container{
+        position: relative;
+        z-index: 2;
+    }
+    .gallery_title{
+        margin-bottom: 160px;
+        width: 400px;
+        float: right;
+        text-align: left;
+    }
+    .gallery_title h2{
+        font-size: 35px;
+        line-height: 1.5;
+    }
+    .gallery_title p{
+        font-size: 17px;
+        color: #000;
+        font-weight: 600;
+    }
+    .gallery_wrap{
+        display: block;
+    }
+    .gallery_wrap .pic{
+        padding: 0;
+        height: auto;
+        display: block;
+        position: relative;
+        overflow: initial;
+        background-color: #fff;
+        box-shadow: 0 0 10px 10px transparent;
+        transition: box-shadow .3s;
+    }
+    .gallery_wrap .pic:hover{
+        box-shadow: 0 0 10px 10px #aaa5;
+    }
+    .gallery_wrap .pic img{
+        transition: transform .3s;
+    }
+    .gallery_wrap .pic:hover img{
+        transform: scale(.95);
+    }
+    .gallery_wrap .pic::before,
+    .gallery_wrap .pic::after{
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    .gallery_wrap .pic::before{
+        border: 1px solid #fff;
+        transition: transform .3s;
+        z-index: 2;
+    }
+    .gallery_wrap .pic:hover::before{
+        transform: scale(.8);
+    }
+    .gallery_wrap .pic::after{
+        background-image: url('./pic/magnifier.png');
+        background-size: 20%;
+        background-repeat: no-repeat;
+        background-position: center center;
+        opacity: 0;
+        transition: opacity .3s;
+    }
+    .gallery_wrap .pic:hover::after{
+        opacity: 1;
+    }
+    .section_gallery .wrap1{
+        width: 700px;
+        float: left;
+    }
+    .wrap1 .pic1{
+        margin-left: auto;
+        margin-bottom: 30px;
+        width: 185px;
+    }
+    .wrap1 .pic2{
+        margin-bottom: 30px;
+        margin-left: 30px;
+        width: 445px;
+        float: right;
+    }
+    .wrap1 .pic2 img{
+        transform: scale(1);
+    }
+    .wrap1 .pic3{
+        margin-top: 100px;
+        margin-bottom: 30px;
+        width: 85px;
+        float: right;
+    }
+    .wrap1 .pic4{
+        width: 200px;
+        float: right;
+    }
+    .wrap1 .pic5{
+        margin-left: 255px;
+        width: 200px;
+        float: left;
+    }
+    .wrap1 .pic6{
+        margin-left: 30px;
+        width: 85px;
+        float: left;
+    }
+    .section_gallery .wrap2{
+        width: 500px;
+        float: right;
+    }
+    .wrap2 .pic7{
+        margin-left: 30px;
+        margin-bottom: 30px;
+        width: 240px;
+        float: left;
+    }
+    .wrap2 .pic8{
+        margin-bottom: 30px;
+        margin-left: 30px;
+        width: 200px;
+        float: left;
+    }
+    .wrap2 .pic9{
+        margin-left: 30px;
+        width: 85px;
+        float: left;
+    }
+    .wrap2 .pic10{
+        margin-right: 300px;
+        width: 85px;
+        float: right;
+    }
+
+    /* section_fitness區 */
+    .section_fitness{
+        padding: 50px 30px;
+    }
+    .section_fitness::before{
+        background-size: cover;
+    }
+    .fitness_item{
+        width: 45%;
+    }
+    .fitness_item h2{
+        font-size: 65px;
+    }
+    .fitness_item p{
+        font-size: 20px;
+        line-height: 1.6;
+    }
+
+    /* section_coaches區 */
+    .section_coaches{
+        padding: 90px 0;
+    }
+    .coaches_item {
+        margin: 0px 3%;
+        width: 29%;
+        transform: translate3d(-9%,0,0);
+    }
+    .section_coaches .page_wrap {
+        display: none;
+    }
+    .section_coaches .rwd_control{
+        margin: 0 auto;
+        width: 90%;
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        transform: translateY(-20px);
+    }
+    .section_coaches .rwd_control .left,
+    .section_coaches .rwd_control .right{
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        line-height: 45px;
+        font-size: 30px;
+        color: #444;
+        background-color: #fff;
+        transform: rotate(45deg);
+        box-shadow: 1px 1px 3px 3px #aaa5;
+        transition: color .3s;
+    }
+    .section_coaches .rwd_control .left:hover,
+    .section_coaches .rwd_control .right:hover{
+        color: var(--red);
+    }
+    .section_coaches .rwd_control .fa{
+        transform: rotate(-45deg);
+    }
+
+    /* section_clients區 */
+    .section_clients{
+        padding: 0 20px;
+        background-color: #F6F6F6;
+    }
+    .section_clients::before {
+        content: "";
+        width: 50%;
+        height: 70%;
+        position: absolute;
+        top: -10%;
+        left: 50%;
+        z-index: 1;
+    }
+    .section_clients .container{
+        display: flex;
+        align-items: center;
+    }
+    .evaluate_wrap{
+        margin-bottom: 40px;
+        flex-direction: column;
+        height: 250px;
+        overflow-y: hidden;
+    }
+    .clients_evaluate{
+        margin-top: 115px;
+    }
+    .clients_evaluate::before {
+        top: -30px;
+        left: -55px;
+    }
+    .clients_evaluate::after {
+        content: '66';
+        right: 30px;
+        bottom: -20px;
+    }
+    .section_clients .wrap1{
+        width: 50%;
+    }
+    .section_clients .wrap1 h2{
+        margin-bottom: 10px;
+        font-size: 45px;
+        text-align: left;
+    }
+    .section_clients .wrap1 p{
+        margin-bottom: 65px;
+        font-size: 20px;
+    }
+    .section_clients .wrap1 .btn{
+        margin-left: 0;
+    }
+    .section_clients .wrap2{
+        margin-left: auto;
+        margin-right: 5%;
+        width: 30%;
+        height: 80vh;
+        flex-direction: column;
+        overflow: hidden;
+    }
+    .wrap2 .clients_item {
+        margin: 5% auto 5%;
+        padding: 10px;
+        width: 90%;
+        flex-shrink: 0;
+        transform: translateY(-200px);
+        box-shadow: 2px 2px 5px 5px #aaa5;
+    }
+    .section_clients .page_wrap{
+        display: none;
+    }
+
+    /* section_blog區 */
+    .blog_item{
+        width: 33.3333333%;
+    }
+    .blog_item:last-of-type{
+        margin-bottom: 50px;
+    }
+    .blog_item::before{
+        transform: scale(0);
+        transition: transform .3s;
+    }
+    .blog_item:hover::before{
+        transform: scale(1);
+    }
+}
