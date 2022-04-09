@@ -98,6 +98,8 @@ a.btn:hover{
     box-shadow: 0 0 3px 3px #aaa3;
     transition: display .3s,opacity .3s;
     pointer-events: none;
+    z-index: 5;
+    background-color: #fff;
 }
 .header_wrap .icon_wrap.active{
     opacity: 1;
@@ -428,22 +430,35 @@ a.btn:hover{
     font-weight: 900;
 }
 .coaches_wrap{
-    overflow-x: hidden;
+    margin: 20px 0;
+    overflow: hidden;
+    position: relative;
+    top: 0;
+    left: 0;
 }
-.coaches_scroll{
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-    transform: translateX(-200%);
-}
-/* 利用coaches_item設定寬跟margin
-再用coaches_scroll設定js移動 */
 .coaches_item{
-    margin: 0 10%;
-    width: 80%;
-    box-shadow: 5px 5px 10px 10px #aaa5;
+    margin: 20px 5%;
+    width: 90%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-shadow: 5px 5px 5px 5px #ccc5;
     flex-shrink: 0;
-    transition: transform .3s;
+    transition: left .3s;
+    z-index: 3;
+    opacity: 1;
+}
+.coaches_item.prev{
+    left: -100%;
+    z-index: 1;
+}
+.coaches_item.next{
+    left: 100%;
+    z-index: 1;
+}
+.coaches_item.opacity{
+    opacity: 0;
+    transition: opacity .3s;
 }
 .coaches_item .txt{
     padding: 35px 0 28px;
@@ -541,6 +556,21 @@ a.btn:hover{
     width: 70%;
     position: relative;
     flex-shrink: 0;
+    left: 0;
+    transition: left .3s;
+}
+.clients_evaluate.item2,
+.clients_evaluate.item3{
+    margin: 0 auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+.clients_evaluate.prev{
+    left: -300%;
+}
+.clients_evaluate.next{
+    left: 300%;
 }
 .clients_evaluate::before,
 .clients_evaluate::after{
@@ -570,7 +600,6 @@ a.btn:hover{
     font-size: 20px;
 }
 .clients_evaluate span{
-    margin-left: 50px;
     padding-left: 45px;
     position: relative;
     font-size: 20px;
@@ -592,6 +621,7 @@ a.btn:hover{
 }
 .section_clients .wrap2{
     display: flex;
+    position: relative;
 }
 .wrap2 .clients_item{
     margin: 0 5%;
@@ -600,6 +630,29 @@ a.btn:hover{
     flex-shrink: 0;
     box-shadow: 2px 2px 15px 15px #aaa5;
     background-color: #fff;
+    transition: left .3s,transform .3s;
+}
+.clients_item.item{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.clients_item.prev{
+    left: -150%;
+}
+.clients_item.next{
+    transform: translateY(-25px);
+    left: 50%;
+}
+.clients_item.next.item1{
+    transform: translateY(0);
+}
+.clients_item.opacity{
+    opacity: 0;
+    left: 100%;
+}
+.clients_item.active{
+    left: 0;
 }
 .wrap2 .clients_item p{
     padding: 15px 0;
@@ -619,6 +672,7 @@ a.btn:hover{
     height: 11px;
     border: 2px solid var(--red);
     border-radius: 50%;
+    cursor: pointer;
     transition: background-color .3s;
 }
 .section_clients .page.active{
@@ -744,6 +798,7 @@ a.btn:hover{
 }
 .copyright{
     text-align: center;
+    line-height: 1.5;
 }
 .copyright .icon_wrap{
     margin-bottom: 25px;
@@ -781,7 +836,6 @@ a.btn:hover{
         width: 33.3%;
         padding-bottom: 33.3%;
     }
-
         
     /* section_fitness區 */
     .section_fitness::before{
@@ -794,14 +848,24 @@ a.btn:hover{
         padding: 90px 0 120px;
     }
     .coaches_wrap{
-        display: flex;
-        justify-content: space-between;
+        margin: 20px 0;
     }
     .coaches_item{
-        margin: 0 5%;
-        width: 40%;
-        box-shadow: 5px 5px 10px 10px #aaa5;
-        flex-shrink: 0;
+        margin: 20px auto;
+        width: 50%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+    .coaches_item.prev{
+        left: -111%;
+    }
+    .coaches_item.next{
+        left: 80%;
+    }
+    .coaches_item.opacity{
+        opacity: 1;
     }
 
     /* section_timer區 */
@@ -875,18 +939,24 @@ a.btn:hover{
     }
     
     /* section_coaches區 */
+    
     .coaches_item{
-        /* transform: translate3d(-60%,0,0); */
+        width: 40%;
+        position: absolute;
     }
 
     /* section_clients區 */
     .section_clients .wrap1 .btn{
         margin-left: 10vw;
     }
-    .clients_evaluate{
-        margin: 0 10% 50px;
-        width: 80%;
+    .evaluate_wrap{
+        justify-content: center;
     }
+    .clients_evaluate{
+        margin: 0 auto 50px;
+        width: 500px;
+    }
+   
     .clients_evaluate p{
         margin-bottom: 35px;
         font-size: 18px;
@@ -1064,19 +1134,16 @@ a.btn:hover{
         opacity: 0;
         height: 0;
         pointer-events: none;
-        transition: opacity .3s,height .3s;
     }
     .coaches_item.active .icon_wrap{
         opacity: 1;
         height: auto;
-        pointer-events:all
+        pointer-events: all;
+        transition: opacity 1s .3s,height 1s .3s;
     }
     .coaches_item{
-        margin: 0 10%;
-        width: 40%;
+        width: 45%;
         box-shadow: 5px 5px 10px 10px #aaa5;
-        flex-shrink: 0;
-        transition: transform .3s;
     }
 
     /* section_timer區 */
@@ -1089,16 +1156,41 @@ a.btn:hover{
         width: 25%;
     }
 
-    /* section_clients區 */  
+    /* section_clients區 */
     .wrap2 .clients_item{
-        margin: 0 auto;
+        margin: auto;
         padding: 5px;
-        width: 23%;
-        flex-shrink: 0;
-        box-shadow: 2px 2px 15px 15px #aaa5;
-        background-color: #fff;
-    }  
-
+        width: 30%;
+    }
+    .clients_item.item{
+        margin: 0 auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+    .wrap2 .clients_item.prev{
+        margin: 0;
+        left: -1.6%;
+        opacity: 1;
+    }
+    .clients_item.item1.next{
+        margin-left: 71%;
+        transform: none;
+    }
+    .clients_item.next{
+        margin: 0;
+        transform: translateY(0);
+        left: 70%;
+    }
+    .clients_item.active{
+        transform: translateY(-10px);
+        left: 0;
+        z-index: 2;
+    }
+    .section_clients .page_wrap{
+        display: none;
+    }
     /* section_blog區 */
     .blog_wrap{
         display: flex;
@@ -1337,9 +1429,10 @@ a.btn:hover{
         padding: 90px 0;
     }
     .coaches_item {
-        margin: 0px 3%;
-        width: 29%;
-        transform: translate3d(-9%,0,0);
+        width: 40%;
+    }
+    .coaches_item.prev{
+        left: -101%;
     }
     .section_coaches .page_wrap {
         display: none;
@@ -1354,6 +1447,7 @@ a.btn:hover{
         right: 0;
         top: 50%;
         transform: translateY(-20px);
+        z-index: 5;
     }
     .section_coaches .rwd_control .left,
     .section_coaches .rwd_control .right{
@@ -1395,22 +1489,21 @@ a.btn:hover{
         align-items: center;
     }
     .evaluate_wrap{
-        margin-bottom: 40px;
+        margin-bottom: 130px;
         flex-direction: column;
         height: 250px;
-        overflow-y: hidden;
     }
     .clients_evaluate{
         margin-top: 115px;
     }
     .clients_evaluate::before {
         top: -30px;
-        left: -55px;
+        left: -35px;
     }
     .clients_evaluate::after {
         content: '66';
-        right: 30px;
-        bottom: -20px;
+        right: 35px;
+        bottom: 43px;
     }
     .section_clients .wrap1{
         width: 50%;
@@ -1431,20 +1524,95 @@ a.btn:hover{
         margin-left: auto;
         margin-right: 5%;
         width: 30%;
-        height: 80vh;
+        height: 890px;
         flex-direction: column;
-        overflow: hidden;
-    }
-    .wrap2 .clients_item {
-        margin: 5% auto 5%;
-        padding: 10px;
-        width: 90%;
-        flex-shrink: 0;
-        transform: translateY(-200px);
-        box-shadow: 2px 2px 5px 5px #aaa5;
+        overflow-x: auto;
+        overflow-y: hidden;
     }
     .section_clients .page_wrap{
         display: none;
+    }
+    .evaluate_wrap{
+        position: relative;
+        overflow: hidden;
+        height: 280px;
+    }
+    .wrap2 .clients_item{
+        padding: 15px;
+        width: 85%;
+        box-shadow: 3px 3px 5px 3px #aaa5;
+        cursor: pointer;
+        transition: top .3s;
+    }
+    .clients_item:hover img{
+        transition: transform .3s;
+    }
+    .clients_item:hover img{
+        transform: scale(.95);
+    }
+    .clients_item.item{
+        margin: auto 0;
+        width: 300px;
+        height: 300px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    .wrap2 .clients_item.prev{
+        margin: auto 0;
+        top: -720px;
+        left: 0;
+        opacity: 1 !important;
+    }
+    .clients_item.item1{
+        margin: auto 0; 
+        width: 300px;
+        height: 300px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+    .clients_item.item1.next{
+        margin-left: 0%;
+        top: 650px;
+        transform: none;
+        opacity: 1;
+    }
+    .clients_item.item1.prev{
+        top: -86px;
+    }
+    .clients_item.next{
+        top: 650px;
+        margin: 0;
+        transform: translateY(0);
+        left: 0;
+        opacity: 1 !important;
+    }
+    .clients_item.active{
+        margin: auto 0;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        transform: translateY(0);
+        z-index: 2;
+    }
+    .clients_evaluate.item2,
+    .clients_evaluate.item3{
+        margin: 0;
+        position: absolute;
+        top: 41px;
+        left: 43px;
+        right: 0;
+    }
+    .clients_evaluate.next{
+        left: 300%;
+    }
+    .clients_evaluate.prev{
+        left: -300%;
     }
 
     /* section_blog區 */
