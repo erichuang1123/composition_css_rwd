@@ -1,4 +1,6 @@
 window.onload = function(){
+    const h1 = document.querySelector('.h1');
+    const topBtn = document.querySelector('.top_btn');
     const menuBtn = document.querySelector('.menu_btn');
     const headerUl = document.querySelector('.main_header ul');
     const closeBtn = document.querySelector('.close_btn');
@@ -12,16 +14,36 @@ window.onload = function(){
     const clientsEvaluate = document.querySelectorAll('.clients_evaluate');
     const clientsPage = document.querySelectorAll('.section_clients .page');
     const clientsItem = document.querySelectorAll('.clients_item');
+    const headerLi = document.querySelectorAll('.main_header ul li ');
+    const evaliateWrap = document.querySelector('.evaluate_wrap');
+    const clientsWrap2 = document.querySelector('.clients_wrap.wrap2');
+    const sectionScroll = [...document.querySelectorAll('section.scroll')];
+    h1.addEventListener('click',()=>window.location.reload());
     coachesWrap.style.height = `${coachesItem[0].offsetHeight + 50}px`;
     let menuActive = false;
     let iconActive = false;
-    // let coachesIndex = 0;
-    let nowSize = window.innerWidth;
-    //用來記前一個數字
-    let prevNumber = {num : 0,clientsNum : 0,clientsNumRwd : 0};
+    let btnTop = false;
+    let nowScroll = window.scrollY;
+    let timer = null;
+    let nowOffset = 0; //手機左右移動開始點
+    let prevNumber = {num : 0,clientsNum : 0,clientsNum : 0};//用來記前一個數字
     function resize(){
-        nowSize = this.innerWidth;
         coachesWrap.style.height = `${coachesItem[0].offsetHeight + 75}px`;
+    }
+    function moveFn(index){
+        timer = setInterval(() => {
+            if(nowScroll < sectionScroll[index].offsetTop){
+                nowScroll += 60;
+                window.scrollTo(0,nowScroll);
+                if(nowScroll >= sectionScroll[index].offsetTop){
+                    window.scrollTo(0,sectionScroll[index].offsetTop);
+                    clearInterval(timer);
+                }
+            }else{
+                nowScroll -= 60;
+                window.scrollTo(0,nowScroll);
+            }
+        }, 5);
     }
     function openFn(){
         menuActive = !menuActive;
@@ -60,6 +82,7 @@ window.onload = function(){
     }
     // (現在位置,要改的arr,前一個數字,點點的arr)
     function changeItem(index,arr,number,pageArr){
+        console.log(index);
         idx = index;
         let {prev,next} = calculate(idx,arr);
         arr.forEach(e=>{
@@ -114,29 +137,89 @@ window.onload = function(){
     }
     coachesPage.forEach((e,index)=>{
         e.addEventListener('click',function(){
-            changeItem(index,coachesItem,prevNumber['num'],coachesPage)
+            changeItem(index,coachesItem,'num',coachesPage)
         })
     })
     coachesleft.addEventListener('click',function(){
-        changeItem(NumChange(prevNumber['num']-1,coachesItem),coachesItem,prevNumber['num'],coachesPage);
+        changeItem(NumChange(prevNumber['num']-1,coachesItem),coachesItem,'num',coachesPage);
     })
     coachesRight.addEventListener('click',function(){
-        changeItem(NumChange(prevNumber['num']+1,coachesItem),coachesItem,prevNumber['num'],coachesPage);
+        changeItem(NumChange(prevNumber['num']+1,coachesItem),coachesItem,'num',coachesPage);
     })
     clientsPage.forEach((e,index)=>{
         e.addEventListener('click',function(){
-            changeItem(NumChange(index,clientsPage),clientsEvaluate,prevNumber['clientsNum'],clientsPage);
-            changeItem(NumChange(index,clientsPage),clientsItem,prevNumber['clientsNum'],clientsPage);
+            changeItem(NumChange(index,clientsPage),clientsEvaluate,'clientsNum',clientsPage);
+            changeItem(NumChange(index,clientsPage),clientsItem,'clientsNum',clientsPage);
+        })
+    }) 
+    clientsItem.forEach((e,index)=>{
+        e.addEventListener('click',()=>{
+            changeItem(NumChange(index,Array(3)),clientsEvaluate,'clientsNum',clientsPage);
+            changeItem(NumChange(index,Array(3)),clientsItem,'clientsNum',clientsPage);
         })
     })
-    if(nowSize >= 1200){    
-        clientsItem.forEach((e,index)=>{
-            e.addEventListener('click',()=>{
-                changeItem(NumChange(index,Array(3)),clientsEvaluate,prevNumber['clientsNum'],clientsPage);
-                changeItem(NumChange(index,Array(3)),clientsItem,prevNumber['clientsNumRwd'],clientsPage);
+    // 回歸上方按鈕偵測
+    window.addEventListener('scroll',()=>{
+        btnTop = window.scrollY >= window.innerHeight ? true : false;
+        console.log();
+        if(btnTop){
+            topBtn.classList.add('active');
+        }else{
+            topBtn.classList.remove('active');
+        }
+    })
+    topBtn.addEventListener('click',()=>{
+        nowScroll = window.scrollY;
+        moveFn(0);
+    })
+    // 計算absolute區塊更新高度coaches
+    window.addEventListener('resize',resize);
+    headerLi.forEach((dom,index)=>{
+        dom.addEventListener('click',()=>{
+            moveFn(index);
+            headerUl.classList.remove('active');
+            closeBtn.classList.remove('active');
+        })
+    })
+    function mouseMoveFn(e){
+        let {pageX} = e;
+        pageX = Math.floor((pageX / this.offsetWidth) * 50)
+        evaliateWrap.style.transform = 'translateX('+ pageX +'px)';
+        clientsWrap2.style.transform = 'translateX('+ pageX +'px)';
+    }
+    function mouseDownFn(arr,down,move,leave){
+        arr.addEventListener(down,(e)=>{
+            nowOffset = e.pageX;
+            arr.addEventListener(move,mouseMoveFn)
+            arr.addEventListener(leave,()=>{
+                arr.removeEventListener(move,mouseMoveFn)    
             })
         })
     }
-    // 計算absolute區塊更新高度coaches
-    window.addEventListener('resize',resize);
+    function mouseUpFn(arr,up,mousemove){
+        arr.addEventListener(up,(e)=>{
+            if(nowOffset - e.pageX > arr.offsetWidth/3){
+                changeItem(NumChange(prevNumber['clientsNum']+1,clientsPage),clientsEvaluate,'clientsNum',clientsPage);
+                changeItem(NumChange(prevNumber['clientsNum'],clientsPage),clientsItem,'clientsNum',clientsPage);
+            }else if(e.pageX - nowOffset > arr.offsetWidth/3){
+                changeItem(NumChange(prevNumber['clientsNum']-1,clientsPage),clientsEvaluate,'clientsNum',clientsPage);
+                changeItem(NumChange(prevNumber['clientsNum'],clientsPage),clientsItem,'clientsNum',clientsPage);
+            }
+            arr.removeEventListener(mousemove,mouseMoveFn)
+            evaliateWrap.style.transform = '';
+            clientsWrap2.style.transform = '';
+        })
+    }
+    // 手機平板畫面拖動移動
+    // 文字移動偵測
+    mouseDownFn(evaliateWrap,'mousedown','mousemove','mouseleave');
+    mouseDownFn(evaliateWrap,'touchstart','touchmove','touchleave');
+    mouseUpFn(evaliateWrap,'mouseup','mousemove');
+    mouseUpFn(evaliateWrap,'touchend','touchmove');
+    // 圖片移動偵測
+    mouseDownFn(clientsWrap2,'mousedown','mousemove','mouseleave');
+    mouseDownFn(clientsWrap2,'touchstart','touchmove','touchleave');
+    mouseUpFn(clientsWrap2,'mouseup','mousemove');
+    mouseUpFn(clientsWrap2,'touchend','touchmove');
+
 }

@@ -68,7 +68,7 @@ a.btn:hover{
     left: 0;
     border-bottom: 1px solid #aaa5;
     background-color: #fff;
-    z-index: 5;
+    z-index: 100;
 }
 .header_wrap{
     display: flex;
@@ -183,6 +183,26 @@ a.btn:hover{
 }
 .main_header .icon_btn .point::after{
     bottom: -20px;
+}
+.top_btn{
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    position: fixed;
+    right: 40px;
+    /* bottom: 40px; */
+    bottom: -200%;
+    color : #fff;
+    text-align: center;
+    background-color: var(--red);
+    cursor: pointer;
+    transition: background-color .3s,bottom .3s;
+}
+.top_btn:hover{
+    background-color: var(--block);
+}
+.top_btn.active{
+    bottom: 40px;
 }
 
 /* section_banner區 */
@@ -558,6 +578,7 @@ a.btn:hover{
     flex-shrink: 0;
     left: 0;
     transition: left .3s;
+    user-select : none;
 }
 .clients_evaluate.item2,
 .clients_evaluate.item3{
@@ -631,6 +652,7 @@ a.btn:hover{
     box-shadow: 2px 2px 15px 15px #aaa5;
     background-color: #fff;
     transition: left .3s,transform .3s;
+    user-select: none;
 }
 .clients_item.item{
     position: absolute;
@@ -658,6 +680,9 @@ a.btn:hover{
     padding: 15px 0;
     text-align: center;
     background-color: #fff;
+}
+.wrap2 .clients_item .pic img{
+    pointer-events: none;
 }
 .section_clients .page_wrap{
     display: flex;
@@ -1188,9 +1213,7 @@ a.btn:hover{
         left: 0;
         z-index: 2;
     }
-    .section_clients .page_wrap{
-        display: none;
-    }
+    
     /* section_blog區 */
     .blog_wrap{
         display: flex;
@@ -1537,6 +1560,10 @@ a.btn:hover{
         overflow: hidden;
         height: 280px;
     }
+    .evaluate_wrap,
+    .section_clients .wrap2{
+        transform: translateX(0) !important;
+    }
     .wrap2 .clients_item{
         padding: 15px;
         width: 85%;
@@ -1604,7 +1631,7 @@ a.btn:hover{
     .clients_evaluate.item3{
         margin: 0;
         position: absolute;
-        top: 41px;
+        top: 60px;
         left: 43px;
         right: 0;
     }
@@ -1613,6 +1640,9 @@ a.btn:hover{
     }
     .clients_evaluate.prev{
         left: -300%;
+    }
+    .wrap2 .clients_item .pic img{
+        pointer-events: all;
     }
 
     /* section_blog區 */
