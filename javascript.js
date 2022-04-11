@@ -1,4 +1,5 @@
 window.onload = function(){
+    const section = [...document.querySelectorAll('.section')];
     const h1 = document.querySelector('.h1');
     const topBtn = document.querySelector('.top_btn');
     const menuBtn = document.querySelector('.menu_btn');
@@ -158,15 +159,19 @@ window.onload = function(){
             changeItem(NumChange(index,Array(3)),clientsItem,'clientsNum',clientsPage);
         })
     })
-    // 回歸上方按鈕偵測
+    // 回歸上方按鈕偵測，出場動畫偵測
     window.addEventListener('scroll',()=>{
         btnTop = window.scrollY >= window.innerHeight ? true : false;
-        console.log();
-        if(btnTop){
-            topBtn.classList.add('active');
-        }else{
-            topBtn.classList.remove('active');
+        btnTop ? topBtn.classList.add('active') : topBtn.classList.remove('active');
+
+        if(!section[section.length-1].classList.contains('active')){
+            section.forEach(e=>{
+                if(window.scrollY > (e.offsetTop - (e.offsetHeight / 1.5))){
+                    e.classList.add('active');
+                }
+            })
         }
+
     })
     topBtn.addEventListener('click',()=>{
         nowScroll = window.scrollY;

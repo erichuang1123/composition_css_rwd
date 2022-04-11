@@ -254,6 +254,22 @@ a.btn:hover{
 .service_item{
     margin-bottom: 30px;
     text-align: center;
+    opacity: 0;
+}
+.section_service.active .service_item{
+    opacity: 1;
+}
+.section_service.active .item1{
+    transition: opacity .3s;
+}
+.section_service.active .item2{
+    transition: opacity .3s .2s;
+}
+.section_service.active .item3{
+    transition: opacity .3s .4s;
+}
+.section_service.active .item4{
+    transition: opacity .3s .6s;
 }
 .service_item .icon{
     margin: 0 auto 40px;
@@ -309,12 +325,18 @@ a.btn:hover{
     background-repeat: no-repeat;
     background-position: center left 40%;
     background-size: 370%;
+    overflow: hidden;
 }
 .workout_title{
     margin-bottom: 40px;
     padding: 20px 20px;
     position: relative;
+    left: -200%;
     border: 2px solid var(--red);
+    transition: left .3s;
+}
+.section_workout.active .workout_title{
+    left: 0;
 }
 .workout_title::before{
     content: 'ONLY 5 DAYS';
@@ -337,10 +359,18 @@ a.btn:hover{
     font-size: 18px;
     line-height: 1.5;
 }
+.work_item{
+    position: relative;
+    left: 200%;
+    transition: left .3s 1s;
+}
+.section_workout.active .work_item{
+    left: 0;
+}
 .work_item input{
     margin-bottom: 20px;
     display: block;
-    padding: 15px 140px 15px 15px;
+    padding: 15px 130px 15px 15px;
     border: 1px solid #aaa;
     outline: none;
 }
@@ -360,10 +390,17 @@ a.btn:hover{
 .section_gallery{
     padding: 60px 20px;
     background-color: #F6F6F6;
+    overflow: hidden;
 }
 .gallery_title{
     margin-bottom: 40px;
     text-align: center;
+    position: relative;
+    left: -200%;
+    transition: left .3s;
+}
+.section_gallery.active .gallery_title{
+    left: 0;
 }
 .gallery_title h2{
     margin-bottom: 50px;
@@ -385,16 +422,54 @@ a.btn:hover{
     width: 50%; 
     padding-bottom: 50%;
     height: 0;
+    position: relative;
     overflow: hidden;
 }
 .gallery_wrap .pic2 img{
     transform: scale(1.2);
+}
+.gallery_wrap .pic1,
+.gallery_wrap .pic3,
+.gallery_wrap .pic5,
+.gallery_wrap .pic7,
+.gallery_wrap .pic9{
+    top: -200vw;
+}
+.gallery_wrap .pic2,
+.gallery_wrap .pic6,
+.gallery_wrap .pic10{
+    top: 200vw;
+}
+.gallery_wrap .pic4,
+.gallery_wrap .pic8{
+    opacity: 0;
+}
+
+.section_gallery.active .gallery_wrap .pic1,
+.section_gallery.active .gallery_wrap .pic3,
+.section_gallery.active .gallery_wrap .pic5,
+.section_gallery.active .gallery_wrap .pic7,
+.section_gallery.active .gallery_wrap .pic9{
+    top: 0;
+    transition: top .3s .3s;
+}
+.section_gallery.active .gallery_wrap .pic2,
+.section_gallery.active .gallery_wrap .pic6,
+.section_gallery.active .gallery_wrap .pic10{
+    top: 0;
+    transition: top .3s .6s;
+}
+.section_gallery.active .gallery_wrap .pic4,
+.section_gallery.active .gallery_wrap .pic8{
+    opacity: 1;
+    transition: top .3s .3s;
 }
 
 /* section_fitness區 */
 .section_fitness{
     padding: 0 20px;
     position: relative;
+    overflow: hidden;
 }
 .section_fitness::before{
     content: '';
@@ -414,6 +489,14 @@ a.btn:hover{
 .section_fitness .container{
     position: relative;
     z-index: 2;
+}
+.fitness_item{
+    position: relative;
+    left: -200%;
+    transition: left .3s;
+}
+.section_fitness.active .fitness_item{
+    left: 0%;
 }
 .fitness_item h2{
     padding-top: 150px;
@@ -455,6 +538,11 @@ a.btn:hover{
     position: relative;
     top: 0;
     left: 0;
+    opacity: 0;
+    transition: opacity .5s .2s;
+}
+.section_coaches.active .coaches_wrap{
+    opacity: 1;
 }
 .coaches_item{
     margin: 20px 5%;
@@ -523,9 +611,11 @@ a.btn:hover{
 /* section_timer區 */
 .section_timer{
     padding: 65px 0 0;
+    overflow: hidden;
 }
 .timer_item{
     margin-bottom: 75px;
+    position: relative;
     text-align: center;
     color: #4C4C4C;
 }
@@ -533,6 +623,24 @@ a.btn:hover{
     margin-bottom: 18px;
     font-size: 57px;
     font-weight: 800;
+}
+.timer_item.item1,
+.timer_item.item3{
+    left: -200%;
+    transition: left .3s .2s;
+}
+.timer_item.item2,
+.timer_item.item4{
+    top: -200vw;
+    transition: top .3s .4s;
+}
+.section_timer.active .item1,
+.section_timer.active .item3{
+    left: 0;
+}
+.section_timer.active .item2,
+.section_timer.active .item4{
+    top: 0;
 }
 
 /* section_clients區 */
@@ -559,6 +667,11 @@ a.btn:hover{
 .section_clients .container{
     position: relative;
     z-index: 2;
+    opacity: 0;
+    transition: opacity .5s .4s;
+}
+.section_clients.active .container{
+    opacity: 1;
 }
 .section_clients .wrap1 h2{
     margin-bottom: 40px;
@@ -707,6 +820,7 @@ a.btn:hover{
 /* section_blog區 */
 .section_blog{
     padding: 50px 20px;
+    overflow: hidden;
 }
 .section_blog h2{
     margin-bottom: 50px;
@@ -720,6 +834,27 @@ a.btn:hover{
     position: relative;
     border: 1px solid #aaa5;
     transition: box-shadow .3s;
+}
+.section_blog .item1{
+    left: -200%;
+    transition: left .3s .6s;
+}
+.section_blog .item2{
+    top: -200vw;
+    transition: top .3s .9s;
+}
+.section_blog .item3{
+    left: 300%;
+    transition: left .3s 1.2s;
+}
+.section_blog.active .item1{
+    left: 0;
+}
+.section_blog.active .item2{
+    top: 0;
+}
+.section_blog.active .item3{
+    left: 0;
 }
 .blog_item:last-of-type{
     margin-bottom: 0;
